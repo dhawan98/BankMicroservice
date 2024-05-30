@@ -1,6 +1,5 @@
-**Important: Don't forget to update the [Candidate README](#candidate-readme) section**
 
-Real-time Transaction
+Real-time Transaction App
 ===============================
 ## Overview
 Built a small component of a banking engine : Real time balance calculation using event-sourcing.
