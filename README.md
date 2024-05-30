@@ -1,14 +1,13 @@
 **Important: Don't forget to update the [Candidate README](#candidate-readme) section**
 
-Real-time Transaction Challenge
+Real-time Transaction
 ===============================
 ## Overview
-Welcome to Current's take-home technical assessment for backend engineers! We appreciate you taking the time to complete this, and we're excited to see what you come up with.
-
-Today, you will be building a small but critical component of Current's core banking enging: real-time balance calculation through [event-sourcing](https://martinfowler.com/eaaDev/EventSourcing.html).
+Built a small component of a banking engine : Real time balance calculation using event-sourcing.
+(https://martinfowler.com/eaaDev/EventSourcing.html).
 
 ## Schema
-The [included service.yml](service.yml) is the OpenAPI 3.0 schema to a service we would like you to create and host. 
+The [included service.yml](service.yml) is the OpenAPI 3.0 schema to a service used to create and host. 
 
 ## Details
 The service accepts two types of transactions:
@@ -18,19 +17,9 @@ The service accepts two types of transactions:
 
 Every load or authorization PUT should return the updated balance following the transaction. Authorization declines should be saved, even if they do not impact balance calculation.
 
-You may use any technologies to support the service. We do not expect you to use a persistent store (you can you in-memory object), but you can if you want. We should be able to bootstrap your project locally to test.
 
-## Expectations
-We are looking for attention in the following areas:
-1) Do you accept all requests supported by the schema, in the format described?
 
-2) Do your responses conform to the prescribed schema?
 
-3) Does the authorizations endpoint work as documented in the schema?
-
-4) Do you have unit and integrations test on the functionality?
-
-# Candidate README
 ## Bootstrap instructions
 1. Prerequisites:
     -Java JDK11 or higher
@@ -62,7 +51,7 @@ We are looking for attention in the following areas:
 3. Testing: A comprehensive set of unit test cases and integration tests have been covered to ensure the reliability of the app.
 4. Performance: In-memory objects are used to keep track of events which makes the recovery of events quicker. A persistent database can be used as well to ensure a better backup is stored on the machine.
 
-##Notable design considerations:
+## Notable design considerations:
 1. User creation: Since we did not have a frontend and no other way to create users. A new user is created as soon as we send the first “load” request to our service(UserId, currency,   balance). Before the first Load request, authorization request (for a new user) will be declined because the user does not exist in the system. 
 2. Currency Consistency: The application mandates currency consistency for transactions. If a user attempts to add money in a different currency than what was previously used for the    user, the transaction will be declined.
 3. Transaction Limit: The service allows a maximum transaction limit of 10,000 units for “Authorization” in a single request. Debit transactions exceeding this limit are automatically   declined. However, load transactions(credit) are allowed for any amount. This has been done to avoid any fraudulent transactions.
@@ -72,7 +61,7 @@ We are looking for attention in the following areas:
 
 
 
-## Bonus: Deployment considerations
+## Deployment considerations
 
 Below is a structured approach, i would suggest for deployment for this project:
 1. Deployment Strategy: It is essential to adopt a strategy that supports continuous integration and deployment (CI/CD), allowing for rapid iterations and minimal downtime. This will   make the app more reliable and robust.
@@ -89,55 +78,3 @@ Below is a structured approach, i would suggest for deployment for this project:
 6. Security Measures: All traffic should be encrypted using SSL/TLS to secure data in transit. Data encryption and network security needs to be configured properly to ensure a safe       transaction and avoid any fraudulent transactions.
 7. Recovery: Regular backups and snapshots of the database and filesystems to ensure data can be restored to a known good state. 
 
-## ASCII art
-Charizard
-                 ."-,.__
-                 `.     `.  ,
-              .--'  .._,'"-' `.
-             .    .'         `'
-             `.   /          ,'
-               `  '--.   ,-"'
-                `"`   |  \
-                   -. \, |
-                    `--Y.'      ___.
-                         \     L._, \
-               _.,        `.   <  <\                _
-             ,' '           `, `.   | \            ( `
-          ../, `.            `  |    .\`.           \ \_
-         ,' ,..  .           _.,'    ||\l            )  '".
-        , ,'   \           ,'.-.`-._,'  |           .  _._`.
-      ,' /      \ \        `' ' `--/   | \          / /   ..\
-    .'  /        \ .         |\__ - _ ,'` `        / /     `.`.
-    |  '          ..         `-...-"  |  `-'      / /        . `.
-    | /           |L__           |    |          / /          `. `.
-   , /            .   .          |    |         / /             ` `
-  / /          ,. ,`._ `-_       |    |  _   ,-' /               ` \
- / .           \"`_/. `-_ \_,.  ,'    +-' `-'  _,        ..,-.    \`.
-.  '         .-f    ,'   `    '.       \__.---'     _   .'   '     \ \
-' /          `.'    l     .' /          \..      ,_|/   `.  ,'`     L`
-|'      _.-""` `.    \ _,'  `            \ `.___`.'"`-.  , |   |    | \
-||    ,'      `. `.   '       _,...._        `  |    `/ '  |   '     .|
-||  ,'          `. ;.,.---' ,'       `.   `.. `-'  .-' /_ .'    ;_   ||
-|| '              V      / /           `   | `   ,'   ,' '.    !  `. ||
-||/            _,-------7 '              . |  `-'    l         /    `||
-. |          ,' .-   ,' ||               | .-.        `.      .'     ||
- `'        ,'    `".'    |               |    `.        '. -.'       `'
-          /      ,'      |               |,'    \-.._,.'/'
-          .     /        .               .       \    .''
-        .`.    |         `.             /         :_,'.'
-          \ `...\   _     ,'-.        .'         /_.-'
-           `-.__ `,  `'   .  _.>----''.  _  __  /
-                .'        /"'          |  "'   '_
-               /_|.-'\ ,".             '.'`__'-( \
-                 / ,"'"\,'               `/  `-.|" 
-
-
-## License
-
-At CodeScreen, we strongly value the integrity and privacy of our assessments. As a result, this repository is under exclusive copyright, which means you **do not** have permission to share your solution to this test publicly (i.e., inside a public GitHub/GitLab repo, on Reddit, etc.). <br>
-
-## Submitting your solution
-
-Please push your changes to the `main branch` of this repository. You can push one or more commits. <br>
-
-Once you are finished with the task, please click the `Submit Solution` link on <a href="https://app.codescreen.com/candidate/4227d305-dea8-4118-8dd6-0bd103734d8e" target="_blank">this screen</a>.
